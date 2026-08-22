@@ -22,10 +22,13 @@ datasource db {
  * deve iniciar com letra maiúscula
  * deve estar no singular
 */
+// (...código existente...)
+
+
 model Customer {
  id             Int        @id @default(autoincrement())  // Chave primária, autoincremental
  name           String               // Nome do cliente
- ident_document String               // Documento de identidade (usaremos o CPF)
+ ident_document String     @unique   // Documento de identidade (usaremos o CPF)
  birth_date     DateTime?  @db.Date  // Data de nascimento (? = opcional)
  street_name    String               // Nome da rua do endereço
  house_number   String               // Número da casa
@@ -34,6 +37,7 @@ model Customer {
  municipality   String               // Município
  state          String     @db.Char(2) // UF
  phone          String               // Telefone/celular
- email          String               // E-mail
+ email          String     @unique   // E-mail
 }
+
 
