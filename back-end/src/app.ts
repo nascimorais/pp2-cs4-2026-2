@@ -4,7 +4,7 @@ import logger from 'morgan'
 
 import indexRouter from './routes/index'
 import usersRouter from './routes/users'
-import customersRouter from './routes/customers'
+import customersRouter from './routes/ customers'
 
 
 const app = express()

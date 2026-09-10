@@ -1,4 +1,4 @@
-import * as repository from "../repositories/customerRepository.ts";
+import * as repository from "../repositories/customerRepository";
 
 
 import type { Customer } from "../generated/prisma/client.ts";

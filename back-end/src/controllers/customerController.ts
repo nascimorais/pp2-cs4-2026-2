@@ -6,7 +6,7 @@ import type {
 } from "express";
 
 
-import * as service from "../services/customerService.ts";
+import * as service from "../services/customerService";
 
 
 import type { CreateCustomerDto } from "../dto/customer/createCustomerDto.ts";

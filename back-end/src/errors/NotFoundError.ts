@@ -1,5 +1,4 @@
-
-import { AppError } from './AppError.ts'
+import { AppError } from './AppError'
 
 
 export class NotFoundError extends AppError {
@@ -8,4 +7,3 @@ export class NotFoundError extends AppError {
    this.name = 'NotFoundError'
  }
 }
-
