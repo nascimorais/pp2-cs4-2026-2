@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "generate": "prisma generate",
     "dev": "tsx watch ./src/bin/server",
     "start": "node ./dist/bin/server.js",
     "build": "rimraf dist && npx tsc",
     "postbuild": "copyfiles -u 1 src/views/*.null dist",
+    "postinstall": "npm run generate",
     "prestart": "npm run build"
   },
   "dependencies": {
