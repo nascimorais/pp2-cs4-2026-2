@@ -1,4 +1,4 @@
-import { prisma } from "../database/client";
+import { prisma } from "../database/client.ts";
 
 import type { CreateCustomerDto } from "../dto/customer/createCustomerDto.ts";
 
