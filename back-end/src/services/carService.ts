@@ -1,6 +1,6 @@
 import * as repository from "../repositories/carRepository";
-import { CreateCarDto } from "../dto/car/createCarDto";
-import { UpdateCarDto } from "../dto/car/updateCarDto";
+import { CreateCarDto } from "../dto/customer/car/createCarDto";
+import { UpdateCarDto } from "../dto/customer/car/updateCarDto";
 import { NotFoundError } from "../errors/NotFoundError";
 
 export async function findAll() {
