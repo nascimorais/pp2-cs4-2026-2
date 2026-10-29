@@ -1,66 +1,69 @@
-import { useState } from 'react'
-import type { Customer } from '../types/Customer'
+import { useState } from "react";
+import type { Customer } from "../types/Customer";
 
+export function CustomersList() {
+  const [customers, setCustomers] = useState<Customer[]>([]);
 
-type CustomerListProps = {
- list?: Customer[]
+  async function fetchData() {
+    const apiHost = import.meta.env.VITE_API_BASE;
+
+    try {
+      const response = await fetch(`${apiHost}/customers`);
+
+      if (!response.ok) {
+        throw new Error(`Erro HTTP ${response.status}`);
+      }
+
+      const data: Customer[] = await response.json();
+      setCustomers(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        window.alert("ERRO: " + error.message);
+      }
+    }
+  }
+
+  return (
+    <>
+      <p className="text-secondary">Total de clientes: {customers.length}</p>
+
+      <div className="table-responsive">
+        <table className="table table-striped table-hover align-middle">
+          <thead className="table-dark">
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Nome</th>
+              <th scope="col">CPF</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Telefone</th>
+              <th scope="col">Município</th>
+              <th scope="col">UF</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {customers.map((customer) => (
+              <tr key={customer.id}>
+                <td>{customer.id}</td>
+                <td>{customer.name}</td>
+                <td>{customer.ident_document}</td>
+                <td>{customer.email}</td>
+                <td>{customer.phone}</td>
+                <td>{customer.municipality}</td>
+                <td>{customer.state}</td>
+              </tr>
+            ))}
+
+            {customers.length === 0 && (
+              <tr>
+                <td colSpan={7} className="text-center text-secondary">
+                  Nenhum cliente cadastrado.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
 }
-
-
-export function CustomersList({ list = [] }: CustomerListProps) {
-  const [customers, setCustomers] = useState([])
-
-
-
- return (
-   <>
-
-
-     <p className="text-secondary">
-       Total de clientes: {list.length}
-     </p>
-
-
-     <div className="table-responsive">
-       <table className="table table-striped table-hover align-middle">
-         <thead className="table-dark">
-           <tr>
-             <th scope="col">Código</th>
-             <th scope="col">Nome</th>
-             <th scope="col">CPF</th>
-             <th scope="col">E-mail</th>
-             <th scope="col">Telefone</th>
-             <th scope="col">Município</th>
-             <th scope="col">UF</th>
-           </tr>
-         </thead>
-
-
-         <tbody>
-           {list.map(list => (
-             <tr key={list.id}>
-               <td>{list.id}</td>
-               <td>{list.name}</td>
-               <td>{list.ident_document}</td>
-               <td>{list.email}</td>
-               <td>{list.phone}</td>
-               <td>{list.municipality}</td>
-               <td>{list.state}</td>
-             </tr>
-           ))}
-
-
-           {list.length === 0 && (
-             <tr>
-               <td colSpan={7} className="text-center text-secondary">
-                 Nenhum cliente cadastrado.
-               </td>
-             </tr>
-           )}
-         </tbody>
-       </table>
-     </div>
-   </>
- )
-}
-
